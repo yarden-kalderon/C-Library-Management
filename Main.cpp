@@ -575,6 +575,7 @@ void intro()
 void admin_menu()
 {
 	cout << "Hello world\n";
+	cout << "im nir" <<endl;
 	int ch2;
 	cout << "\n\n\n     ADMINISTRATOR MENU";
 	cout << "\n\n\t1.CREATE STUDENT RECORD";
