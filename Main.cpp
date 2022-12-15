@@ -29,6 +29,8 @@ class book
 	char bno[6];
 	char bname[50];
 	char aname[20];
+	int rate;
+
 public:
 	void create_book()
 	{
@@ -41,6 +43,7 @@ public:
 		cout << "\n\nEnter The Author's Name ";
 		gets_s(aname);
 		cout << "\n\n\nBook Created..";
+
 	}
 
 	void show_book()
@@ -69,8 +72,15 @@ public:
 
 	void report()
 	{
-		cout << bno << setw(30) << bname << setw(30) << aname << endl;
+		cout << bno << setw(30) << bname << setw(30) << aname << setw(10) << rate << endl;
 	}
+
+	void set_rate()
+	{
+		cout << "\nHow much did you like the book from 1 - 10 ?" ;
+		cin >> this->rate;
+	}
+
 
 
 };         //class ends here
@@ -429,10 +439,10 @@ void display_allb()
 	}
 
 	cout << "\n\n\t\tBook LIST\n\n";
-	cout << "============================================\n";
-	cout << "Book Number" << setw(20) << "Book  Name" << setw(25)
-		<< "Author\n";
-	cout << "===========================================\n";
+	cout << "===========================================================================================\n";
+	cout << "Book Number" << setw(28) << "Book  Name" << setw(25)
+		<< "Author"<<"     Last Rate\n";
+	cout << "===========================================================================================\n";
 
 	while (fp.read((char*)&bk, sizeof(book)))
 	{
@@ -541,6 +551,12 @@ void book_deposit()
 						fp.write((char*)&st,
 							sizeof(student));
 						cout << "\n\n\t Book deposited successfully";
+						bk.set_rate();
+						pos = -1 * int(sizeof(bk));
+						fp1.seekp(pos, ios::cur);
+						fp1.write((char*)&bk, sizeof(book));
+						cout << "\n\n\t Rate Book Updated";
+					
 					}
 				}
 				if (flag == 0)
@@ -695,7 +711,7 @@ private:
 		}
 	};
 public:
-	Game(){
+	Game() {
 		srand(time(0));
 		code = rand() % 9000 + 1000;
 		guesses = 0;
@@ -738,24 +754,24 @@ public:
 
 void Buls_cows()
 {
-	
-		Game NewGame;
-		bool gameon = true;
-		int turn = 1, new_guess;
-		cout << "Welcome to the game!\n A=Bool , B = Hit " << endl;
-		while (gameon)
+
+	Game NewGame;
+	bool gameon = true;
+	int turn = 1, new_guess;
+	cout << "Welcome to the game!\n A=Bool , B = Hit " << endl;
+	while (gameon)
+	{
+		cout << "Please enter your " << turn << " Guess!" << endl;
+		cin >> new_guess;
+		turn++;
+		if (NewGame.update(new_guess))
 		{
-			cout << "Please enter your " << turn << " Guess!" << endl;
-			cin >> new_guess;
-			turn++;
-			if (NewGame.update(new_guess))
-			{
-				break;
-			}
+			break;
 		}
-		cout << "Congratulations!" << endl;
-		NewGame.print();
 	}
+	cout << "Congratulations!" << endl;
+	NewGame.print();
+}
 
 
 
