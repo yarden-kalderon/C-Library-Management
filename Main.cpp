@@ -10,6 +10,11 @@
 #include<cstdio>
 using namespace std;
 
+
+#include < conio.h >
+
+
+
 #define _CRT_SECURE_NO_WARNINGS_
 
 //*********************************************************
@@ -98,7 +103,7 @@ public:
 	void show_student()
 	{
 		cout << "\nAdmission no. : " << admno;
-		cout << "\nStudent Name : "<<name; 
+		cout << "\nStudent Name : " << name;
 		puts(name);
 		cout << "\nNo of Book issued : " << token;
 		if (token == 1)
@@ -238,7 +243,7 @@ void display_sps(char n[])
 	fp.close();
 	if (flag == 0)
 		cout << "\n\nStudent does not exist";
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -275,7 +280,7 @@ void modify_book()
 	fp.close();
 	if (found == 0)
 		cout << "\n\n Record Not Found ";
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -307,7 +312,7 @@ void modify_student()
 	fp.close();
 	if (found == 0)
 		cout << "\n\n Record Not Found ";
-	emptych=getchar();
+	emptych = getchar();
 }
 
 //*********************************************************
@@ -338,12 +343,12 @@ void delete_student()
 	fp2.close();
 	fp.close();
 	remove("student.dat");
-	emptych=rename("Temp.dat", "student.dat");
+	emptych = rename("Temp.dat", "student.dat");
 	if (flag == 1)
 		cout << "\n\n\tRecord Deleted ..";
 	else
 		cout << "\n\nRecord not found";
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -369,9 +374,9 @@ void delete_book()
 	fp2.close();
 	fp.close();
 	remove("book.dat");
-	emptych=rename("Temp.dat", "book.dat");
+	emptych = rename("Temp.dat", "book.dat");
 	cout << "\n\n\tRecord Deleted ..";
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -387,7 +392,7 @@ void display_alls()
 	if (!fp)
 	{
 		cout << "ERROR!!! FILE COULD NOT BE OPEN ";
-		emptych=getchar();
+		emptych = getchar();
 		return;
 	}
 
@@ -404,7 +409,7 @@ void display_alls()
 	}
 
 	fp.close();
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -419,7 +424,7 @@ void display_allb()
 	if (!fp)
 	{
 		cout << "ERROR!!! FILE COULD NOT BE OPEN ";
-		emptych=getchar();
+		emptych = getchar();
 		return;
 	}
 
@@ -434,7 +439,7 @@ void display_allb()
 		bk.report();
 	}
 	fp.close();
-	emptych=getchar();
+	emptych = getchar();
 }
 
 
@@ -489,7 +494,7 @@ void book_issue()
 	}
 	if (found == 0)
 		cout << "Student record not exist...";
-	emptych=getchar();
+	emptych = getchar();
 	fp.close();
 	fp1.close();
 }
@@ -500,7 +505,7 @@ void book_issue()
 
 void book_deposit()
 {
-	char sn[6],  bn[6];
+	char sn[6], bn[6];
 	int found = 0, flag = 0, day, fine;
 	system("CLS");
 	cout << "\n\nBOOK DEPOSIT ...";
@@ -531,7 +536,7 @@ void book_deposit()
 							cout << "\n\nFine has to deposited Rs " << fine;
 						}
 						st.resettoken();
-						int pos = -1 *int(sizeof(st));
+						int pos = -1 * int(sizeof(st));
 						fp.seekp(pos, ios::cur);
 						fp.write((char*)&st,
 							sizeof(student));
@@ -547,7 +552,7 @@ void book_deposit()
 	}
 	if (found == 0)
 		cout << "Student record not exist...";
-	emptych=getchar();
+	emptych = getchar();
 	fp.close();
 	fp1.close();
 }
@@ -563,8 +568,9 @@ void intro()
 {
 	system("CLS");
 	cout << "\n\n\n\n\n\n\n\n\t                    LIBRARY MANAGEMENT SYSTEM";
-	emptych=getchar();
+	emptych = getchar();
 }
+
 
 
 
@@ -574,8 +580,7 @@ void intro()
 
 void admin_menu()
 {
-	cout << "Hello world\n";
-	cout << "im nir" <<endl;
+
 	int ch2;
 	cout << "\n\n\n     ADMINISTRATOR MENU";
 	cout << "\n\n\t1.CREATE STUDENT RECORD";
@@ -626,6 +631,134 @@ void admin_menu()
 	admin_menu();
 }
 
+//********************************************************
+//    	GAMES MENU FUNCTION
+//*********************************************************
+
+class Game
+{
+private:
+	int code;
+	int guesses;
+	int* history;
+	int* grades;
+	bool Check(int guess) {
+		{
+			int A = 0, B = 0, temp = code;
+			int c[4];
+			int g[4];
+			for (int i = 3; i >= 0; i--)
+			{
+				g[i] = guess % 10;
+				c[i] = temp % 10;
+				temp /= 10;
+				guess /= 10;
+			}
+			for (int i = 0; i < 4; ++i)
+			{
+				if (g[i] == c[i])
+				{
+					A++;
+					c[i] = -1;
+					g[i] = -2;
+				}
+			}
+			for (int i = 0; i < 4; ++i)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					if (g[i] == c[j])
+					{
+						B++;
+						c[j] = -1;
+						break;
+					}
+				}
+			}
+			cout << A << " A And " << B << " B" << endl;
+			//cout << code;
+			int* tempgrades = new int[2 * guesses];
+			if (guesses > 1)
+			{
+				for (int i = 0; i < 2 * guesses - 2; ++i)
+					tempgrades[i] = grades[i];
+			}
+			tempgrades[2 * guesses - 2] = A;
+			tempgrades[2 * guesses - 1] = B;
+			delete[] grades;
+			grades = tempgrades;
+			if (A == 4)
+			{
+				return true;
+			}
+			return false;
+		}
+	};
+public:
+	Game(){
+		srand(time(0));
+		code = rand() % 9000 + 1000;
+		guesses = 0;
+		history = NULL;
+		grades = NULL;
+	};
+	Game(const Game& previous) {
+		code = previous.code;
+		guesses = previous.guesses;
+		history = previous.history;
+		grades = previous.grades;
+	};
+	bool update(int guess) {
+		guesses++;
+		int* temphistory = new int[guesses];
+		int i = 0;
+		if (guesses > 1)
+		{
+			for (; i < guesses - 1; ++i)
+				temphistory[i] = history[i];
+		}
+		temphistory[i] = guess;
+		delete[] history;
+		history = temphistory;
+		cout << guesses << endl;
+		return this->Check(guess);
+	};
+	void print()const {
+		for (int i = 0; i < guesses; i++)
+			cout << i + 1 << "# Guess: " << history[i] << " " << grades[2 * i] << "A" << grades[2 * i + 1] << "B" << endl;
+	};
+	~Game() {
+		delete[] history;
+		delete[] grades;
+	};
+};
+
+
+
+
+void Buls_cows()
+{
+	
+		Game NewGame;
+		bool gameon = true;
+		int turn = 1, new_guess;
+		cout << "Welcome to the game!\n A=Bool , B = Hit " << endl;
+		while (gameon)
+		{
+			cout << "Please enter your " << turn << " Guess!" << endl;
+			cin >> new_guess;
+			turn++;
+			if (NewGame.update(new_guess))
+			{
+				break;
+			}
+		}
+		cout << "Congratulations!" << endl;
+		NewGame.print();
+	}
+
+
+
 
 //***************************************************
 //    	THE MAIN FUNCTION OF PROGRAM
@@ -638,13 +771,15 @@ int main()
 	intro();
 	do
 	{
+		cout << "hi\n\n\n\n";
 		system("CLS");
 		cout << "\n\n\n     MAIN MENU";
 		cout << "\n\n\t01. BOOK ISSUE";
 		cout << "\n\n\t02. BOOK DEPOSIT";
 		cout << "\n\n\t03. ADMINISTRATOR MENU";
-		cout << "\n\n\t04. EXIT";
-		cout << "\n\n     Please Select Your Option (1-4) ";
+		cout << "\n\n\t04. AVIRAM GAME - Bulls And cows";
+		cout << "\n\n\t05. EXIT";
+		cout << "\n\n     Please Select Your Option (1-5) ";
 		ch = getchar();
 		switch (ch)
 		{
@@ -655,12 +790,14 @@ int main()
 			break;
 		case '3':admin_menu();
 			break;
-		case '4':exit(0);
+		case '4':Buls_cows();
+			break;
+		case '5':exit(0);
 		default:cout << "\a";
 		}
 		emptych = getchar();
-	} while (ch != '4');
-	
+	} while (ch != '5');
+
 	return 0;
 }
 
