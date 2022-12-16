@@ -29,7 +29,8 @@ class book
 	char bno[6];
 	char bname[50];
 	char aname[20];
-	int rate;
+	float rate;
+	int btake;
 
 public:
 	void create_book()
@@ -75,10 +76,17 @@ public:
 		cout << bno << setw(30) << bname << setw(30) << aname << setw(10) << rate << endl;
 	}
 
+	void set_take()
+	{
+		btake += 1;
+	}
 	void set_rate()
 	{
+		int x;
 		cout << "\nHow much did you like the book from 1 - 10 ?" ;
-		cin >> this->rate;
+		cin >> x;
+		this->rate = (rate * (btake - 1) + x) / btake;
+		
 	}
 
 
@@ -440,8 +448,8 @@ void display_allb()
 
 	cout << "\n\n\t\tBook LIST\n\n";
 	cout << "===========================================================================================\n";
-	cout << "Book Number" << setw(28) << "Book  Name" << setw(25)
-		<< "Author"<<"     Last Rate\n";
+	cout << "Book Number" << setw(28) << "Book Name" << setw(25)
+		<< "Author"<<"      Rate\n";
 	cout << "===========================================================================================\n";
 
 	while (fp.read((char*)&bk, sizeof(book)))
@@ -490,7 +498,7 @@ void book_issue()
 						fp.write((char*)&st, sizeof
 						(student));
 						cout << "\n\n\t Book issued successfully\n\nPlease Note: Write current date in back side of book and submit within 15 days fine Rs. 1 for each day after 15 days period";
-
+						
 					}
 				}
 				if (flag == 0)
@@ -551,12 +559,16 @@ void book_deposit()
 						fp.write((char*)&st,
 							sizeof(student));
 						cout << "\n\n\t Book deposited successfully";
+						bk.set_take();
+						pos = -1 * int(sizeof(bk));
+						fp1.seekp(pos, ios::cur);
+						fp1.write((char*)&bk, sizeof(book));
 						bk.set_rate();
 						pos = -1 * int(sizeof(bk));
 						fp1.seekp(pos, ios::cur);
 						fp1.write((char*)&bk, sizeof(book));
 						cout << "\n\n\t Rate Book Updated";
-					
+						
 					}
 				}
 				if (flag == 0)
