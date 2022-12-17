@@ -31,6 +31,7 @@ class book
 	char aname[20];
 	float rate;
 	int btake;
+    int loc_in_lib;
 
 public:
 	void create_book()
@@ -43,6 +44,7 @@ public:
 		gets_s(bname);
 		cout << "\n\nEnter The Author's Name ";
 		gets_s(aname);
+        whereIsTheBook();
 		cout << "\n\n\nBook Created..";
 
 	}
@@ -51,10 +53,10 @@ public:
 	{
 		cout << "\nBook no. : " << bno;
 		cout << "\nBook Name : ";
-
 		puts(bname);
 		cout << "Author Name : ";
 		puts(aname);
+        cout << "Place In Library is column #" << loc_in_lib ; 
 	}
 
 	void modify_book()
@@ -64,6 +66,8 @@ public:
 		gets_s(bname);
 		cout << "\nModify Author's Name of Book : ";
 		gets_s(aname);
+        cout << "\nModify Book Designated Column : ";
+		whereIsTheBook();
 	}
 
 	char* retbno()
@@ -88,9 +92,11 @@ public:
 		this->rate = (rate * (btake - 1) + x) / btake;
 		
 	}
-
-
-
+    void whereIsTheBook()
+    {
+        cout << "\nWhat is the designated column for the book? ";
+        cin >> this->loc_in_lib;
+    }
 };         //class ends here
 
 
