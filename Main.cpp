@@ -928,25 +928,34 @@ bool MyDate::isBefore(const MyDate &date)  const{
 
 int main()
 {
-        MyDate d, d2;
-        int day, month, year,day2, month2, year2,num;
+        MyDate *d;
+        MyDate d2;
+        int day, month, year,day2, month2, year2,size;
+        int count=0;
         char ch;
     
-      cout<<"Desired return date:";
-       cin>>day>>ch>>month>>ch>>year;
-       d.setDate(day, month, year);
-      
-       cout<<endl<<"return date:";
-       cin>>day2>>ch>>month2>>ch>>year2;
-       d2.setDate(day2, month2, year2);
+      cout<<"Enter the number of students who received an extension of time:";
+      cin>>size;
+      d=new MyDate[size];
     
-    if(d.isBefore(d2)){
-            cout<<"The student returned the book on time"<<endl;
-        }
-        else{
-            cout<<"The student was late in returning the book"<<endl;
-        }
+      for(int i=0; i<size; i++){
+        
+          cout<<"Book return date after extension of time of student["<<i+1<<"]: ";
+          cin>>day>>ch>>month>>ch>>year;
+          d[i].setDate(day, month, year);
+          cout<<endl<<"return date of student["<<i+1<<"]:";
+          cin>>day2>>ch>>month2>>ch>>year2;
+          d2.setDate(day2, month2, year2);
+          if(d[i].isBefore(d2)){
+               cout<<"student ["<<i+1<<"] returned the book on time"<<endl;
+          }
+          else{
+              cout<<"student ["<<i+1<<"] was late in returning the book"<<endl;
+              count++;
+          }
+      }
     
+     cout<<"The number of students who were late after an extension of time:"<<count;
     
     intro();
     do
