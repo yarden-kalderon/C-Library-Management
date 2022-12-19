@@ -832,6 +832,10 @@ int main()
 		emptych = getchar();
 	} while (ch != '5');
 
+	
+	cout<<"shalom";
+	
+	
 	return 0;
 }
 
