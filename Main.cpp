@@ -797,7 +797,6 @@ void Buls_cows()
 
 class MyDate {
 public:
-    MyDate(); //default constructor
     MyDate(int day, int month, int year, char* str); // constructor
     MyDate(const MyDate &x); // copy constructor
     bool isBefore(const MyDate &date) const;
