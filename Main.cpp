@@ -935,26 +935,32 @@ int main()
         
       cout<<"Enter the number of students who received an extension of time:";
       cin>>size;
-      d=new MyDate[size];
     
-      for(int i=0; i<size; i++){
+     if(size!=0){
+    
+       d=new MyDate[size];
+       for(int i=0; i<size; i++){
         
-          cout<<"The desired date for returning a book to the student["<<i+1<<"] after overtime: ";
-          cin>>day>>ch>>month>>ch>>year;
-          d[i].setDate(day, month, year);
-          cout<<endl<<"The date the student ["<<i+1<<"] returned the book:";
-          cin>>day2>>ch>>month2>>ch>>year2;
-          d2.setDate(day2, month2, year2);
-          if(!d[i].isBefore(d2)){
-               cout<<"student ["<<i+1<<"] returned the book on time"<<endl;
-          }
-          else{
-              cout<<"student ["<<i+1<<"] was late in returning the book"<<endl;
-              count++;
-          }
-      }
-    
-     cout<<"The number of students who were late after an extension of time:"<<count;
+           cout<<"The desired date for returning a book to the student["<<i+1<<"] after overtime: ";
+           cin>>day>>ch>>month>>ch>>year;
+           d[i].setDate(day, month, year);
+           cout<<endl<<"The date the student ["<<i+1<<"] returned the book:";
+           cin>>day2>>ch>>month2>>ch>>year2;
+           d2.setDate(day2, month2, year2);
+           if(!d[i].isBefore(d2)){
+                cout<<"student ["<<i+1<<"] returned the book on time"<<endl;
+           }
+           else{
+               cout<<"student ["<<i+1<<"] was late in returning the book"<<endl;
+               count++;
+           }
+       }
+          cout<<"The number of students who were late after an extension of time:"<<count;
+         
+       }
+     else{
+         cout<<"There are no students with a special return time";
+     }
     
     intro();
     do
