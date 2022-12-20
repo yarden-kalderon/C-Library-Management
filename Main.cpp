@@ -933,20 +933,20 @@ int main()
         int day, month, year,day2, month2, year2,size;
         int count=0;
         char ch;
-    
+        
       cout<<"Enter the number of students who received an extension of time:";
       cin>>size;
       d=new MyDate[size];
     
       for(int i=0; i<size; i++){
         
-          cout<<"Book return date after extension of time of student["<<i+1<<"]: ";
+          cout<<"The desired date for returning a book to the student["<<i+1<<"] after overtime: ";
           cin>>day>>ch>>month>>ch>>year;
           d[i].setDate(day, month, year);
-          cout<<endl<<"return date of student["<<i+1<<"]:";
+          cout<<endl<<"The date the student ["<<i+1<<"] returned the book:";
           cin>>day2>>ch>>month2>>ch>>year2;
           d2.setDate(day2, month2, year2);
-          if(d[i].isBefore(d2)){
+          if(!d[i].isBefore(d2)){
                cout<<"student ["<<i+1<<"] returned the book on time"<<endl;
           }
           else{
