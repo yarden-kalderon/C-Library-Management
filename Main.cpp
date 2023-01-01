@@ -795,6 +795,11 @@ void Buls_cows()
 
 
 
+//***************************************************
+//       Special dates function
+//***************************************************
+
+
 class MyDate {
 public:
     MyDate(int day, int month, int year, char* str); // constructor
@@ -869,7 +874,7 @@ bool MyDate::setYear(int y) {
 
 void MyDate::setDate(int d, int m, int y) {
 
-    int newDay=1, newMonth=1, newYear=1900;
+    int newDay=1, newMonth=1, newYear=1;
 
     if(!setYear(y)){
         y=newYear;
