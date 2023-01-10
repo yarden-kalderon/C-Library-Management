@@ -1,4 +1,4 @@
-#include<iostream>
+[15:28, 10.1.2023] ירדן: #include<iostream>
 #include<fstream>
 #include<conio.h>
 #include<stdio.h>
@@ -19,6 +19,53 @@ using namespace std;
 //*******************
 //                   CLASS USED IN PROJECT
 //*******************
+
+char emptych;
+int emptyint;
+
+class book
+{
+	char bno[6];
+	char bname[50];
+	char aname[20];
+	float rate;
+	int btake;
+	int loc_in_lib;
+
+public:
+	void create_book()
+	{
+		cout << "\nNEW BOOK ENTRY...\n";
+		cout << "\nEnter The book no.";
+		cin >> bno;
+		emptych = getchar();
+		cout << "\n\nEnter The Name of The Book ";
+		gets_s(bname);
+		cout << "\n\nEnter The Author's Name ";
+		gets_s(aname);
+		whereIsTheBook();
+		cout << "\n\n\nBook Cr…
+[18:17, 10.1.2023] ירדן: #include<iostream>
+#include<fstream>
+#include<conio.h>
+#include<stdio.h>
+#include<process.h>
+#include<string.h>
+#include<iomanip>
+#include<stdlib.h>
+#include<cstdio>
+using namespace std;
+
+
+#include < conio.h >
+
+
+
+#define CRT_SECURE_NO_WARNINGS
+
+//*******
+//                   CLASS USED IN PROJECT
+//*******
 
 char emptych;
 int emptyint;
@@ -183,18 +230,18 @@ public:
 
 
 
-//********************
+//********
 //    	global declaration for stream object, object
-//*******************
+//*******
 
 fstream fp, fp1;
 book bk;
 student st;
 
 
-//********************
+//********
 //    	function to write in file
-//********************
+//********
 
 void write_book()
 {
@@ -227,9 +274,9 @@ void write_student()
 }
 
 
-//********************
+//********
 //    	function to read specific record from file
-//********************
+//********
 
 
 void display_spb(char n[])
@@ -272,9 +319,9 @@ void display_sps(char n[])
 }
 
 
-//********************
+//********
 //    	function to modify record of file
-//********************
+//********
 
 
 void modify_book()
@@ -340,9 +387,9 @@ void modify_student()
 	emptych = getchar();
 }
 
-//*******************
+//*******
 //    	function to delete record of file
-//********************
+//********
 
 
 void delete_student()
@@ -406,9 +453,9 @@ void delete_book()
 
 
 
-//*******************
+//*******
 //    	function to display all students list
-//********************
+//********
 
 void display_alls()
 {
@@ -439,9 +486,9 @@ void display_alls()
 }
 
 
-//********************
+//********
 //    	function to display Books list
-//********************
+//********
 
 void display_allb()
 {
@@ -470,9 +517,9 @@ void display_allb()
 
 
 
-//********************
+//********
 //    	function to issue book
-//********************
+//********
 
 void book_issue()
 {
@@ -526,9 +573,9 @@ void book_issue()
 	fp1.close();
 }
 
-//*******************
+//*******
 //    	function to deposit book
-//********************
+//********
 
 void book_deposit()
 {
@@ -598,9 +645,9 @@ void book_deposit()
 
 
 
-//*********************
+//*******
 //    	INTRODUCTION FUNCTION
-//**********************
+//********
 
 void intro()
 {
@@ -614,9 +661,9 @@ void intro()
 
 
 
-//********************
+//********
 //    	ADMINISTRATOR MENU FUNCTION
-//*******************
+//*******
 
 void admin_menu()
 {
@@ -678,9 +725,9 @@ void admin_menu()
 	admin_menu();
 }
 
-//********************
+//********
 //    	GAMES MENU FUNCTION
-//*******************
+//*******
 
 class Game
 {
@@ -805,9 +852,9 @@ void Buls_cows()
 }
 
 
-//********************
+//********
 //    special dates functcin
-//*******************
+//*******
 
 //start.
 struct Date {
@@ -847,9 +894,9 @@ Date* init(int size) {
 
 
 
-//*****************
+//*******
 //    	THE MAIN FUNCTION OF PROGRAM
-//*****************
+//*******
 
 int main()
 {
@@ -858,11 +905,7 @@ int main()
 	int size, counter = 0, day, month, year;
 	char ch1;
 	char ch;
-	int yarden =0;
-	cout << "to chech special dates only enter 1 else enter eny other number:";
-	cin >> yarden;
-
-	if (yarden != 1) {
+	
 		intro();
 		system("CLS");
 		do
@@ -887,17 +930,20 @@ int main()
 				break;
 			case '4':Buls_cows();
 				break;
-			case '5':exit(0);
+			case '5':ch = '5';
 			default:cout << "\a";
 			}
 			emptych = getchar();
 		} while (ch != '5');
-	}
+	
 
-	//y
-	else {
-		cout <<endl << "Enter a number of students who received a special date: ";
+	//me
+		cout << endl << "Enter a number of students who received a special date: ";
 		cin >> size;
+		if (size == 0) {
+			cout << endl << "no speshel dates  bye bye..." << endl;
+			return 0;
+		}
 		dates = init(size);
 
 		cout << endl << "Enter the special date: ";
@@ -912,11 +958,7 @@ int main()
 			}
 		}
 		cout << "The number of late students is:" << counter << endl;
-		cout << " bye bye..."<<endl;
-	}
-
-
+		cout << " bye bye..." << endl;
+	
 	return 0;
 }
-
-//*****END OF PROJECT*********
