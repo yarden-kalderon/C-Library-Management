@@ -1,4 +1,3 @@
-
 #include<iostream>
 #include<fstream>
 #include<conio.h>
@@ -15,11 +14,11 @@ using namespace std;
 
 
 
-#define _CRT_SECURE_NO_WARNINGS_
+#define CRT_SECURE_NO_WARNINGS
 
-//*********************************************************
+//*******
 //                   CLASS USED IN PROJECT
-//*********************************************************
+//*******
 
 char emptych;
 int emptyint;
@@ -58,7 +57,7 @@ public:
 		puts(aname);
 		system("Color 0A");
 		cout << "Place In Library is column #" << loc_in_lib;
-		
+
 	}
 
 	void modify_book()
@@ -184,18 +183,18 @@ public:
 
 
 
-//**********************************************************
+//********
 //    	global declaration for stream object, object
-//*********************************************************
+//*******
 
 fstream fp, fp1;
 book bk;
 student st;
 
 
-//**********************************************************
+//********
 //    	function to write in file
-//**********************************************************
+//********
 
 void write_book()
 {
@@ -228,9 +227,9 @@ void write_student()
 }
 
 
-//**********************************************************
+//********
 //    	function to read specific record from file
-//**********************************************************
+//********
 
 
 void display_spb(char n[])
@@ -273,9 +272,9 @@ void display_sps(char n[])
 }
 
 
-//**********************************************************
+//********
 //    	function to modify record of file
-//**********************************************************
+//********
 
 
 void modify_book()
@@ -341,9 +340,9 @@ void modify_student()
 	emptych = getchar();
 }
 
-//*********************************************************
+//*******
 //    	function to delete record of file
-//**********************************************************
+//********
 
 
 void delete_student()
@@ -407,9 +406,9 @@ void delete_book()
 
 
 
-//*********************************************************
+//*******
 //    	function to display all students list
-//**********************************************************
+//********
 
 void display_alls()
 {
@@ -440,9 +439,9 @@ void display_alls()
 }
 
 
-//**********************************************************
+//********
 //    	function to display Books list
-//**********************************************************
+//********
 
 void display_allb()
 {
@@ -471,9 +470,9 @@ void display_allb()
 
 
 
-//********************************************************
+//********
 //    	function to issue book
-//**********************************************************
+//********
 
 void book_issue()
 {
@@ -527,9 +526,9 @@ void book_issue()
 	fp1.close();
 }
 
-//*********************************************************
+//*******
 //    	function to deposit book
-//**********************************************************
+//********
 
 void book_deposit()
 {
@@ -599,9 +598,9 @@ void book_deposit()
 
 
 
-//***************************************************************
+//*******
 //    	INTRODUCTION FUNCTION
-//****************************************************************
+//********
 
 void intro()
 {
@@ -615,13 +614,13 @@ void intro()
 
 
 
-//********************************************************
+//********
 //    	ADMINISTRATOR MENU FUNCTION
-//*********************************************************
+//*******
 
 void admin_menu()
 {
-	
+
 	system("Color 07");
 	int ch2;
 	cout << "\n\n\n     ADMINISTRATOR MENU";
@@ -645,7 +644,7 @@ void admin_menu()
 		system("Color 09");
 		write_student(); break;
 	case 2: system("CLS");
-		display_alls(); 
+		display_alls();
 		break;
 	case 3:
 		char num[6];
@@ -679,9 +678,9 @@ void admin_menu()
 	admin_menu();
 }
 
-//********************************************************
+//********
 //    	GAMES MENU FUNCTION
-//*********************************************************
+//*******
 
 class Game
 {
@@ -806,47 +805,131 @@ void Buls_cows()
 }
 
 
+//********
+//    special dates functcin
+//*******
+
+//start.
+struct Date {
+	int day, month, year;
+};
+
+bool isBefore(Date date1, Date date2) {
+
+	if (date1.year < date2.year) {
+		return false;
+	}
+	else if ((date1.year == date2.year) && (date1.month < date2.month)) {
+		return false;
+	}
+	else if ((date1.year == date2.year) && (date1.month == date2.month) && (date1.day < date2.day)) {
+		return false;
+	}
+	else
+		return true;
+}
+
+Date* init(int size) {
+	int day, month, year;
+	char ch;
+	Date* date = new Date[size];
+	for (int i = 0; i < size; i++) {
+		cout << endl << "Enter date[" << i + 1 << "]:";
+		cin >> day >> ch >> month >> ch >> year;
+		date[i].day = day;
+		date[i].month = month;
+		date[i].year = year;
+	}
+	return date;
+}
 
 
-//***************************************************
+
+void  specialDates() {
+	Date* dates;
+	Date dates1;
+	int size, counter = 0, day, month, year;
+	char ch1;
+
+	//me
+	cout << endl << "Enter a number of students who received a special date: ";
+	cin >> size;
+	if (size == 0) {
+		cout << endl << "no speshel dates  bye bye..." << endl;
+		return;
+	}
+
+	dates = init(size);
+	cout << endl << "Enter the special date: ";
+	cin >> day >> ch1 >> month >> ch1 >> year;
+	dates1.day = day;
+	dates1.month = month;
+	dates1.year = year;
+	cout << "ok" << endl;
+	for (int i = 0; i < size; i++) {
+		if (isBefore(dates[i], dates1)) {
+			counter++;
+		}
+	}
+	cout << "The number of late students is:" << counter << endl;
+	cout << " bye bye..." << endl;
+
+}
+
+//end.
+
+
+
+
+//*******
 //    	THE MAIN FUNCTION OF PROGRAM
-//***************************************************
-
+//*******
 
 int main()
 {
+	int y;
 	char ch;
-	intro();
-	system("CLS");
-	do
-	{
+	
+		intro();
 		system("CLS");
-		system("Color 07");
-		cout << "\n\n\n     MAIN MENU";
-		cout << "\n\n\t01. BOOK ISSUE";
-		cout << "\n\n\t02. BOOK DEPOSIT";
-		cout << "\n\n\t03. ADMINISTRATOR MENU";
-		cout << "\n\n\t04. AVIRAM GAME - Bulls And cows";
-		cout << "\n\n\t05. EXIT";
-		cout << "\n\n     Please Select Your Option (1-5) ";
-		ch = getchar();
-		switch (ch)
+		do
 		{
-		case '1':book_issue();
-			break;
-		case '2':book_deposit();
-			break;
-		case '3':admin_menu();
-			break;
-		case '4':Buls_cows();
-			break;
-		case '5':exit(0);
-		default:cout << "\a";
-		}
-		emptych = getchar();
-	} while (ch != '5');
+			system("CLS");
+			system("Color 07");
+			cout << "\n\n\n     MAIN MENU";
+			cout << "\n\n\t01. BOOK ISSUE";
+			cout << "\n\n\t02. BOOK DEPOSIT";
+			cout << "\n\n\t03. ADMINISTRATOR MENU";
+			cout << "\n\n\t04. AVIRAM GAME - Bulls And cows";
+			cout << "\n\n\t05. EXIT";
+			cout << "\n\n     Please Select Your Option (1-5) ";
+			ch = getchar();
+			switch (ch)
+			{
+			case '1':book_issue();
+				break;
+			case '2':book_deposit();
+				break;
+			case '3':admin_menu();
+				break;
+			case '4':Buls_cows();
+				break;
+			case '5':
+				cout << "if you want to check  special dates enter 1 else enter 0 :";
+				cin >> y;
+				if (y == 1) {
+					specialDates();
+					exit(0);
+				}
+				else
+				    exit(0);
+				
+			default:cout << "\a";
+			}
+			emptych = getchar();
+		} while (ch != '5');
+	
 
+	
 	return 0;
 }
-
-//****************END OF PROJECT**************************
